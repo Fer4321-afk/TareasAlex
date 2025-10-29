@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Importando Módulos JS</title>
+</head>
+
+<body>
+    <h1>Prueba de Enemigos y sus Acciones.</h1>
+
+    <script type="module">
+        import { Enemigo } from './tarea2.js';
+
+        // Crear instancias de enemigos
+        const enemigo1 = new Enemigo('Goblin', 10, 100, 'golpear');
+        console.log(enemigo1);
+        console.log(`El enemigo ${enemigo1.nombre} tiene una fuerza de ${enemigo1.fuerza}, energía de ${enemigo1.energia} y tipo de ataque ${enemigo1.tipoataque}.`);
+
+        const enemigo2 = new Enemigo('Orco', 20, 150, 'disparar');
+        console.log(enemigo2);
+        console.log(`El enemigo ${enemigo2.nombre} tiene una fuerza de ${enemigo2.fuerza}, energía de ${enemigo2.energia} y tipo de ataque ${enemigo2.tipoataque}.`);
+
+        // Probar los métodos
+        enemigo1.mover();
+        enemigo1.atacar();
+        enemigo2.atacar();
+        enemigo2.mover();
+    </script>
+</body>
+
+</html>
