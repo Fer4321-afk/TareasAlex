@@ -1,23 +1,57 @@
-/**
- * Función que simula una petición a una API.
- * Devuelve una promesa que se resuelve o rechaza después de 2 segundos.
- * @param {boolean} exito - Si true, la promesa se resuelve. Si false, se rechaza.
- * @returns {Promise<string>}
- */
-function simularPeticionAPI(exito) {
-  // Creamos una promesa usando el constructor
-  return new Promise((resolver, rechazar) => {
-    console.log("Procesando petición...");
+// libreria que gestiona los gastos por usuario
+// usamos promesas de fs para leer y escribir datos
+import { readFile, writeFile } from "fs/promises";
 
-    // Simulamos el tiempo de espera
-    setTimeout(() => {
-      if (exito) {
-        // Si la operación fue exitosa, resolvemos la promesa
-        resolver("¡Datos recibidos con éxito!");
-      } else {
-        // Si falló, rechazamos la promesa
-        rechazar("Error: No se pudieron obtener los datos.");
-      }
-    }, 2000); // 2 segundos de espera
+const NOMBRE_FICHERO = "./datos.json";
+
+function obtenerGastosUsuario(usuario) {
+  return readFile(NOMBRE_FICHERO, "utf-8")
+    .then((datos) => {
+      const obj = JSON.parse(datos);
+      return obj[usuario] || [];
+    })
+    .catch((err) => {
+      console.error("Error leyendo el fichero:", err);
+      return [];
+    });
+}
+
+function anyadirGastoUsuario(usuario, gasto) {
+  return readFile(NOMBRE_FICHERO, "utf-8").then((datos) => {
+    const obj = JSON.parse(datos);
+    if (!obj[usuario]) obj[usuario] = [];
+    obj[usuario].push(gasto);
+    return writeFile(NOMBRE_FICHERO, JSON.stringify(obj, null, 2));
   });
 }
+
+function actualizarGastoUsuario(usuario, gastoId, nuevosDatos) {
+  return readFile(NOMBRE_FICHERO, "utf-8").then((datos) => {
+    const obj = JSON.parse(datos);
+    if (!obj[usuario]) return Promise.reject(new Error("Usuario no existe"));
+
+    const index = obj[usuario].findIndex((g) => g.id === gastoId);
+    if (index === -1) return Promise.reject(new Error("Gasto no existe"));
+
+    obj[usuario][index] = { ...obj[usuario][index], ...nuevosDatos };
+    return writeFile(NOMBRE_FICHERO, JSON.stringify(obj, null, 2));
+  });
+}
+
+function borrarGastoUsuario(usuario, gastoId) {
+  return readFile(NOMBRE_FICHERO, "utf-8").then((datos) => {
+    const obj = JSON.parse(datos);
+    if (!obj[usuario]) return Promise.reject(new Error("Usuario no existe"));
+
+    obj[usuario] = obj[usuario].filter((g) => g.id !== gastoId);
+    return writeFile(NOMBRE_FICHERO, JSON.stringify(obj, null, 2));
+  });
+}
+
+// --- EXPORTAMOS las funciones pa usar en index.html ---
+export {
+  obtenerGastosUsuario,
+  anyadirGastoUsuario,
+  actualizarGastoUsuario,
+  borrarGastoUsuario,
+};
