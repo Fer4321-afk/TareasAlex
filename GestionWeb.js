@@ -97,12 +97,13 @@ function pintarListado() {
       lista.appendChild(li);
     });
   }
-
+  //muestra la lista en la capa
   capaListado.appendChild(lista);
 }
 
 function guardarEnLocalStorage() {
   const lista = listarGastos();
+  // objeto--->Texto
   const texto = JSON.stringify(lista);
   localStorage.setItem(CLAVE_GASTOS, texto);
   alert("Guardado en localStorage jeje");
