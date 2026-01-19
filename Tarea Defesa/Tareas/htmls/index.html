@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica de Promesas - Gastos Usuarios</title>
+</head>
+
+<body>
+    <h1>Práctica de Promesas 💸</h1>
+    <p>Abre la consola del desarrollador (F12) para ver los resultados de las promesas.</p>
+
+    <h2>Acciones de ejemplo</h2>
+    <button id="btnObtener">Obtener gastos de usuario1</button>
+    <button id="btnAñadir">Añadir gasto a usuario1</button>
+    <button id="btnActualizar">Actualizar primer gasto de usuario1</button>
+    <button id="btnBorrar">Borrar primer gasto de usuario1</button>
+
+    <script type="module">
+        // Importamos la libreria de NodeJS (simulada aquí en el frontend para pruebas)
+        import { obtenerGastosUsuario, anyadirGastoUsuario, actualizarGastoUsuario, borrarGastoUsuario } from './gestorGastosUsuarios.js';
+
+        const btnObtener = document.getElementById('btnObtener');
+        const btnAñadir = document.getElementById('btnAñadir');
+        const btnActualizar = document.getElementById('btnActualizar');
+        const btnBorrar = document.getElementById('btnBorrar');
+
+        // --- EJEMPLO: obtener gastos ---
+        btnObtener.addEventListener('click', () => {
+            obtenerGastosUsuario('usuario1')
+                .then(gastos => console.log('Gastos de usuario1:', gastos))
+                .catch(err => console.error('Error al obtener gastos:', err));
+        });
+
+        // --- EJEMPLO: añadir gasto ---
+        btnAñadir.addEventListener('click', () => {
+            const gastoNuevo = {
+                id: crypto.randomUUID(),
+                descripcion: 'Café desde index',
+                valor: 1.5,
+                fecha: Date.now()
+            };
+            anyadirGastoUsuario('usuario1', gastoNuevo)
+                .then(() => console.log('Gasto añadido:', gastoNuevo))
+                .catch(err => console.error('Error al añadir gasto:', err));
+        });
+
+        // --- EJEMPLO: actualizar gasto ---
+        btnActualizar.addEventListener('click', () => {
+            obtenerGastosUsuario('usuario1')
+                .then(gastos => {
+                    if (gastos.length === 0) throw new Error('No hay gastos para actualizar');
+                    const primerGastoId = gastos[0].id;
+                    return actualizarGastoUsuario('usuario1', primerGastoId, { valor: 2.5 });
+                })
+                .then(() => console.log('Primer gasto actualizado'))
+                .catch(err => console.error('Error al actualizar gasto:', err));
+        });
+
+        // --- EJEMPLO: borrar gasto ---
+        btnBorrar.addEventListener('click', () => {
+            obtenerGastosUsuario('usuario1')
+                .then(gastos => {
+                    if (gastos.length === 0) throw new Error('No hay gastos para borrar');
+                    const primerGastoId = gastos[0].id;
+                    return borrarGastoUsuario('usuario1', primerGastoId);
+                })
+                .then(() => console.log('Primer gasto borrado'))
+                .catch(err => console.error('Error al borrar gasto:', err));
+        });
+    </script>
+</body>
+
+</html>
