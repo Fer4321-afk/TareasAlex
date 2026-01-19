@@ -1,0 +1,138 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilos generales */
+body {
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #f5f5f5;
+}
+
+/* Títulos */
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+h2 {
+  color: #2c3e50;
+  margin-bottom: 15px;
+}
+
+/* Contenedores */
+.contenedor {
+  background: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Formularios */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+label {
+  font-weight: bold;
+}
+
+input,
+button {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/* Botones */
+button {
+  background: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin: 5px;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+/* Total */
+#totalGastos {
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+  color: #28a745;
+}
+
+/* Lista de gastos */
+#listaGastos {
+  margin-top: 15px;
+}
+
+.gasto-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.gasto-info {
+  flex-grow: 1;
+}
+
+.acciones-gasto {
+  display: flex;
+  gap: 5px;
+}
+
+.acciones-gasto button {
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+.btn-eliminar {
+  background: #dc3545;
+}
+
+.btn-eliminar:hover {
+  background: #c82333;
+}
+
+/* Mensajes */
+.mensaje {
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 4px;
+}
+
+.exito {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.error {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Botones locales */
+.botones {
+  text-align: center;
+}
+
+.botones button {
+  margin: 0 10px;
+}

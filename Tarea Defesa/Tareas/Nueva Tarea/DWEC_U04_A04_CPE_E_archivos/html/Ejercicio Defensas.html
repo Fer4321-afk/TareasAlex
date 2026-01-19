@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestor de Gastos</title>
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+
+<body>
+    <h1>Gestor de Gastos</h1>
+
+    <!-- Sección API -->
+    <div class="contenedor">
+        <h2>Conexión API</h2>
+        <input type="text" id="nombreUsuario" placeholder="usuario1 o usuario2">
+        <button id="btnCargarAPI">Cargar desde API</button>
+        <div id="mensajeAPI"></div>
+    </div>
+
+    <!-- Total -->
+    <div id="total" class="contenedor">
+        <h2>Total Gastos</h2>
+        <p id="totalGastos">0 €</p>
+    </div>
+
+    <!-- Formulario -->
+    <div id="formulario" class="contenedor">
+        <h2>Nuevo Gasto</h2>
+        <!-- El formulario se crea dinámicamente -->
+    </div>
+
+    <!-- Lista -->
+    <div id="listado" class="contenedor">
+        <h2>Lista de Gastos</h2>
+        <div id="listaGastos"></div>
+    </div>
+
+    <!-- Botones locales -->
+    <div class="botones">
+        <button id="btnGuardar">Guardar Local</button>
+        <button id="btnCargar">Cargar Local</button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/GestionPresup.js"></script>
+    <script src="js/GestionWeb.js"></script>
+    <script src="js/gestionAPI.js"></script>
+</body>
+
+</html>
